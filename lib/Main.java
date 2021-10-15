@@ -146,8 +146,16 @@ public class Main {
         BufferedReader br = new BufferedReader(new FileReader(path));
         String line = "";
 
+
+        boolean firstLine = false ; 
         while ((line = br.readLine()) != null) {
             String[] value = line.trim().split(",");
+            if (!firstLine){
+                firstLine = true ; 
+                continue ; 
+            }
+
+            
             StudentDate birthDay = new StudentDate(Integer.parseInt(value[3]) , Integer.parseInt(value[4]) , Integer.parseInt(value[5])) ; 
             Student newStudent = new Student(Integer.parseInt(value[2]) , value[0] , value[1] , birthDay , Double.parseDouble(value[6]));
             // Student newStudent = new Student(id, fName, lName, birthDay, gpa);
@@ -160,6 +168,8 @@ public class Main {
     public static void writeFile(String path) throws IOException {
         PrintWriter pw = new PrintWriter(new File(path));
         StringBuilder sb = new StringBuilder();
+
+        sb.append("First Name,Last Name,ID,Day Of Birth,Month Of Birth,Year Of Birth,GPA\n") ; 
 
         for(int i = 0 ; i < studentsArr.size() ; i++){
             //Majid,Saleh,4948,12,15,2001,4.9
